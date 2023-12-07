@@ -6,13 +6,42 @@ using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
     public class MovieController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public MovieController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+        public ViewResult Index()
+        {
+            var movies = _context.Movies.Include(m => m.Genre).ToList();
+            return View(movies);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(movie);
+        }
         // GET: Movie/Random
-        /*
+
         public ActionResult Random()
         {
             var movie = new Movie()
@@ -36,22 +65,18 @@ namespace Vidly.Controllers
                 Movie = movie,
                 Customers = customers
             };
-           
+
             return View(viewModel);
-        }*/
-        public ViewResult Index()
-        {
-            var movies = GetMovies();
-            return View(movies);
         }
-        public IEnumerable<Movie> GetMovies()
-        {
-            return new List<Movie>
-            {
-                new Movie {Name = "Shrek"},
-                new Movie {Name = "Wall-e"}
-            };
-        }
+
+        //public IEnumerable<Movie> GetMovies()
+        //{
+        //    return new List<Movie>
+        //    {
+        //        new Movie {Name = "Shrek"},
+        //        new Movie {Name = "Wall-e"}
+        //    };
+        //}
         //public ActionResult Edit(int movieId)
         //{
         //    return Content("id=" + movieId);

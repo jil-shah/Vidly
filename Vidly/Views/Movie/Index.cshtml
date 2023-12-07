@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Vidly.Models.Movie>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movie";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,6 +9,7 @@
     <thead>
         <tr>
             <th>Movie</th>
+            <th>Genre</th>
         </tr>
     </thead>
     <tbody>
@@ -16,7 +17,10 @@
             {
                 <tr>
                     <td>
-                        @movie.Name
+                        @Html.ActionLink(movie.Name, "Details", "Movie", new {id = movie.Id}, null)
+                    </td>
+                    <td>
+                        @movie.Genre.Name
                     </td>
                 </tr>
             }
