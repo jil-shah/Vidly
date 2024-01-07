@@ -42,32 +42,32 @@ namespace Vidly.Controllers
         }
         // GET: Movie/Random
 
-        public ActionResult Random()
-        {
-            var movie = new Movie()
-            {
-                Name = "Shrek!"
-            };
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Customer 1"},
-                new Customer {Name = "Customer 2"}
-            };
+        //public ActionResult Random()
+        //{
+        //    var movie = new Movie()
+        //    {
+        //        Name = "Shrek!"
+        //    };
+        //    var customers = new List<Customer>
+        //    {
+        //        new Customer {Name = "Customer 1"},
+        //        new Customer {Name = "Customer 2"}
+        //    };
 
-            var movies = new List<Movie>
-            {
-                new Movie {Name = "Shrek"},
-                new Movie {Name = "Wall-e"}
-            };
+        //    var movies = new List<Movie>
+        //    {
+        //        new Movie {Name = "Shrek"},
+        //        new Movie {Name = "Wall-e"}
+        //    };
 
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
+        //    var viewModel = new RandomMovieViewModel
+        //    {
+        //        Movie = movie,
+        //        Customers = customers
+        //    };
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
         //public IEnumerable<Movie> GetMovies()
         //{
